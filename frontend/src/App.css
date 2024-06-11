@@ -12,6 +12,18 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+/* src/App.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input {
+  @apply border border-gray-300 rounded-md p-2 w-full;
+}
+
+.btn {
+  @apply bg-blue-500 text-white py-2 px-4 rounded-md cursor-pointer hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:bg-gray-300 disabled:cursor-not-allowed;
+}
 
 .App-header {
   background-color: #282c34;
