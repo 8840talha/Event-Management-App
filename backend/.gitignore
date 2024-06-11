@@ -1,0 +1,58 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# Database files
+*.sqlite
+*.sqlite3
+
+# Docker files
+docker-compose.override.yml
+docker-compose.yml
+.Dockerfile
+
+# Miscellaneous
+.DS_Store
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# Coverage
+coverage/
+
+# npm packages
+*.tgz
+
+# eslint
+.eslintcache
+
+# Sentry
+.sentryclirc
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# yarn
+yarn.lock
+
+# Testing
+/coverage
