@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import EventCard from './eventCard'; // Import EventCard component
+import React from 'react';
+import EventCard from './eventCard';
 
 interface Event {
   id: number;
@@ -11,17 +10,17 @@ interface Event {
   guests: string;
   agenda: string;
 }
-interface EventListProps {
-    events: Event[];
-  }
-  
-  const EventList: React.FC<EventListProps> = ({ events }) => {
- 
 
+interface EventListProps {
+  events: Event[];
+  fetchEvents: () => void;
+}
+
+const EventList: React.FC<EventListProps> = ({ events, fetchEvents }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {events.map(event => (
-        <EventCard key={event.id} event={event} />
+        <EventCard key={event.id} event={event} fetchEvents={fetchEvents} />
       ))}
     </div>
   );

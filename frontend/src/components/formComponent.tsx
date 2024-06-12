@@ -1,7 +1,7 @@
-// src/components/FormComponent.tsx
 import axios from 'axios';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 interface FormData {
   name: string;
@@ -11,22 +11,22 @@ interface FormData {
   guests: string;
   agenda: string;
 }
+
 interface FormComponentProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
+  fetchEvents: () => void;
 }
 
-const FormComponent:  React.FC<FormComponentProps> = ({ setOpen }) => {
+const FormComponent: React.FC<FormComponentProps> = ({ setOpen,fetchEvents }) => {
   const { register, handleSubmit, formState } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
-    console.log(data,'d')
     axios.post('http://localhost:5000/api/events', data)
       .then(response => {
-        console.log('Event created:', response.data);
-        if(response.data){
-          alert('New Event Created')
-        
-        setOpen(false); // Close the modal
+        if (response.data) {
+          toast('New Event Created');
+          setOpen(false);
+          fetchEvents();
         }
       })
       .catch(error => {
@@ -35,49 +35,42 @@ const FormComponent:  React.FC<FormComponentProps> = ({ setOpen }) => {
   };
 
   return (
-     <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-  
-  <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-
-  <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-    
-      <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-        <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-        <div className="max-w-lg mx-auto">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <label htmlFor="name">Event Name:</label>
-        <input {...register('name')} id="name" type="text" className="input" />
-
-        <label htmlFor="date">Date:</label>
-        <input {...register('date')} id="date" type="date" className="input" />
-
-        <label htmlFor="time">Time:</label>
-        <input {...register('time')} id="time" type="time" className="input" />
-
-        <label htmlFor="duration">Duration (in hours):</label>
-        <input {...register('duration')} id="duration" type="number" className="input" />
-
-        <label htmlFor="guests">Guests:</label>
-        <input {...register('guests')} id="guests" type="text" className="input" />
-
-        <label htmlFor="agenda">Agenda:</label>
-        <textarea {...register('agenda')} id="agenda" rows={4} className="input" />
-
-        <button type="submit" disabled={formState.isSubmitting} className="btn">
-          Create Event
-        </button>
-      </form>
-    </div>     
-        </div>
-              </div>
+    <div className="fixed z-20 inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+        <h2 className="text-2xl font-bold mb-4">Create New Event</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="mb-4">
+            <label htmlFor="name" className="block text-sm font-bold mb-2">Event Name</label>
+            <input {...register('name')} id="name" type="text" className="w-full px-3 py-2 border rounded" required />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="date" className="block text-sm font-bold mb-2">Date</label>
+            <input {...register('date')} id="date" type="date" className="w-full px-3 py-2 border rounded" required />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="time" className="block text-sm font-bold mb-2">Time</label>
+            <input {...register('time')} id="time" type="time" className="w-full px-3 py-2 border rounded" required />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="duration" className="block text-sm font-bold mb-2">Duration (in hours)</label>
+            <input {...register('duration')} id="duration" type="number" className="w-full px-3 py-2 border rounded" required />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="guests" className="block text-sm font-bold mb-2">Guests</label>
+            <input {...register('guests')} id="guests" type="text" className="w-full px-3 py-2 border rounded" required />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="agenda" className="block text-sm font-bold mb-2">Agenda</label>
+            <textarea {...register('agenda')} id="agenda" rows={4} className="w-full px-3 py-2 border rounded" required></textarea>
+          </div>
+          <div className="flex justify-end">
+            <button type="button" onClick={() => setOpen(false)} className="bg-gray-500 text-white py-2 px-4 rounded mr-2">Cancel</button>
+            <button type="submit" disabled={formState.isSubmitting} className="bg-blue-500 text-white py-2 px-4 rounded">Create Event</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-</div>
-
-    
   );
-
 };
 
 export default FormComponent;
