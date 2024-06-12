@@ -5,7 +5,7 @@ const env = process.env.NODE_ENV || 'development';
 const dbConfig = config[env];
 
 const sequelize = new Sequelize(dbConfig.url, {
-  dialect: dbConfig.dialect,
+  dialect: 'postgres',
   logging: false,
 });
 
