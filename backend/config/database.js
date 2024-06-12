@@ -1,12 +1,12 @@
 const { Sequelize } = require('sequelize');
-const config = require('./config');
 
-const env = process.env.NODE_ENV || 'development';
-const dbConfig = config[env];
-
-const sequelize = new Sequelize(dbConfig.url, {
+const sequelize = new Sequelize({
   dialect: 'postgres',
-  logging: false,
+  database : 'eventdb_jd6v',
+  username: 'eventdb_jd6v_user',
+  password: 'Sw2AGlM5iVDPvIIvDvj9ikxUUHrHJYGp',
+  host: 'dpg-cpkppqi0si5c73cviv60-a.oregon-postgres.render.com', 
+  port: 5432, 
 });
 
 module.exports = sequelize;
