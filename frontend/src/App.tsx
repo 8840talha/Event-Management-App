@@ -3,7 +3,7 @@ import './App.css';
 import EventList from './components/eventList';
 import FormComponent from './components/formComponent';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
