@@ -21,7 +21,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ setOpen,fetchEvents }) =>
   const { register, handleSubmit, formState } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
-    axios.post('http://localhost:5000/api/events', data)
+    axios.post('https://event-management-app-1.onrender.com/api/events', data)
       .then(response => {
         if (response.data) {
           toast('New Event Created');

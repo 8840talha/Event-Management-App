@@ -3,7 +3,6 @@ import './App.css';
 import EventList from './components/eventList';
 import FormComponent from './components/formComponent';
 import axios from 'axios';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,7 +12,7 @@ const App: React.FC = () => {
   const [openModal, setModal] = useState(false);
 
   const fetchEvents = () => {
-    axios.get('http://localhost:5000/api/events')
+    axios.get(`https://event-management-app-1.onrender.com/api/events`)
       .then(response => {
         setEvents(response.data);
       })

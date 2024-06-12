@@ -22,7 +22,7 @@ const EventCard: React.FC<Props> = ({ event, fetchEvents }) => {
   const [editedEvent, setEditedEvent] = useState(event);
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:5000/api/events/${event.id}`)
+    axios.delete(`https://event-management-app-1.onrender.com/api/events/${event.id}`)
       .then(() => {
         toast.success('Event Deleted Successfully')
         fetchEvents();
@@ -33,7 +33,7 @@ const EventCard: React.FC<Props> = ({ event, fetchEvents }) => {
   };
 
   const handleEdit = () => {
-    axios.put(`http://localhost:5000/api/events/${event.id}`, editedEvent)
+    axios.put(`https://event-management-app-1.onrender.com/api/events/${event.id}`, editedEvent)
       .then(() => {
         setIsEditing(false);
         toast.success('Event Edited Successfully')
